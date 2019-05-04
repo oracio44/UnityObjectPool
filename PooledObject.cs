@@ -5,6 +5,7 @@ public class PooledObject : MonoBehaviour {
 
     bool ReturningToPool = false;
 
+    //if overridden, ensure to call Base.OnEnable()
     protected void OnEnable()
     {
         ReturningToPool = false;
@@ -12,9 +13,9 @@ public class PooledObject : MonoBehaviour {
 
     public void ReturnToPool () {
 		if (Pool) {
-            if (!ReturningToPool)
+            if (!ReturningToPool) //Ensure object is not returned to the pool multiple times at once
             {
-                Pool.AddObject(gameObject);
+                Pool.AddObject(gameObject); //Object will be disabled and returned to pool
                 ReturningToPool = true;
             }
         }
